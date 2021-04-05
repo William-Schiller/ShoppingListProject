@@ -1,0 +1,21 @@
+header{
+    background: #FF1493;
+    text-align: center;
+}
+
+.titleApp{
+    color: #00ffff;
+    font-size: 120px;
+    animation: Test 1s infinite;
+}
+@keyframes Test{
+    0%{opacity: 1;}
+    50%{opacity: 0;}
+    100%{opacity: 1;}
+}
+
+body{
+    background: #000;
+    color: #ffff00;
+}
+
