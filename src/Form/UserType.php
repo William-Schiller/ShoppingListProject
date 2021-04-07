@@ -28,6 +28,7 @@ class UserType extends AbstractType
 //                                'image/png',
 //                            ],
 //                            'mimeTypesMessage' => 'Please upload a valid document',
+                    //TODO Trouvé les mime pour fichier image
                         ])
                 ],
                 ])
