@@ -15,8 +15,8 @@ class UserType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('roles')
-            ->add('password')
+            //->add('roles')
+           // ->add('password')
             ->add('picture', FileType::class, [
                 'label' => 'Image de profil',
                 'mapped' => false,//pas associe a une entite
