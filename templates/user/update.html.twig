@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello toi!{% endblock %}
+
+{% block main %}
+
+    <h1>Register</h1>
+
+    {{ form_start(userForm) }}
+    {{ form_widget(userForm) }}
+    <button type="submit" class="btn"> Valider</button>
+    {{ form_end(userForm) }}
+{% endblock %}
