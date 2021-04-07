@@ -1,0 +1,2 @@
+retirer le sunrise/slugger du composer.json (utilisé dans userController)
+voir pour les mimeTypes des images (utilisé dans UserType)

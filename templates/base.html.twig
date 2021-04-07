@@ -34,6 +34,10 @@
     </header>
 
     <body>
+    {% if app.user %}
+        <img src="{{ asset('img/profilePicture/'~ app.user.pictureFileName) }}" alt="imageUser">
+        <p>{{ app.user.pictureFileName }}</p>
+    {% endif %}
         {% block main %}{% endblock %}
     </body>
 </html>
