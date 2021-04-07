@@ -121,6 +121,9 @@
             "./config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "sunrise/slugger": {
+        "version": "v2.0.0"
+    },
     "symfony/apache-pack": {
         "version": "1.0",
         "recipe": {

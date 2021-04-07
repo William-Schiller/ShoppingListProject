@@ -4,10 +4,13 @@ namespace App\Controller;
 
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sunrise\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function Sodium\add;
 
 /**
  * Class UserController
@@ -20,7 +23,7 @@ class UserController extends AbstractController
     /**
      * @Route("/update", name="update")
      */
-    public function update(Request $request, EntityManagerInterface $entityManager): Response
+    public function update(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $user = $this->getUser();//on recupere celui qui se log
 
@@ -28,6 +31,25 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $image= $form->get('picture')->getData();
+
+            //debut test
+            if($image){
+                $originalFileName= pathinfo($image->getClientOriginalName(),PATHINFO_FILENAME);
+                $safeFileName=$slugger->slugify($originalFileName, '.');
+                $newFileName = $safeFileName.'-'.uniqid().'.'.$image->guessExtension();
+                try {
+                    $image->move(
+                        $this->getParameter('picture_profile_directory'),
+                        $newFileName
+                    );
+                }catch (FileException $e){
+                    //TODO traiter l exception
+                }
+                $user->setPictureFileName($newFileName);
+            }
+            //fin test , ensuite configu services yaml parameters
+
             $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirectToRoute('main_home');
