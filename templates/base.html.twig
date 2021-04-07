@@ -27,6 +27,9 @@
         <ul>
             <li><a href="{{ path('app_login') }}">Connexion</a></li>
             <li><a href="{{ path('app_register') }}">Creer un compte</a></li>
+            {% if app.user %}
+                <li><a href="{{ path('app_register') }}">Modifier mon compte</a></li>
+            {% endif %}
         </ul>
     </header>
 
