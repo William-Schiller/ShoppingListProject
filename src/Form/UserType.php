@@ -24,12 +24,10 @@ class UserType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '10240k',
-                            'mimeTypes' => [
-                                'application/jpeg',
-                                'application/jpg',
-                                'application/png',
-                            ],
-                            'mimeTypesMessage' => 'Please upload a valid document',
+//                            'mimeTypes' => [
+//                                'image/png',
+//                            ],
+//                            'mimeTypesMessage' => 'Please upload a valid document',
                         ])
                 ],
                 ])
