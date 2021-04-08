@@ -21,8 +21,7 @@ class UserController extends AbstractController
     /**
      * @Route("/update", name="update")
      */
-    public function update(Request $request, EntityManagerInterface $entityManager //, SluggerInterface $slugger
-    ): Response
+    public function update(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();//on recupere celui qui se log
 
@@ -30,25 +29,24 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $image= $form->get('picture')->getData();
+            $image= $form->get('picture')->getData(); // Recuperer le fichier
 
-            //debut test
             if($image){
+                //Recuperer le nom du fichier
                 $originalFileName= pathinfo($image->getClientOriginalName(),PATHINFO_FILENAME);
-//                $safeFileName=$slugger->slugify($originalFileName, '.');
-//                $newFileName = $safeFileName.'-'.uniqid().'.'.$image->guessExtension();
-                $newFileName = $originalFileName;
-                try {
+                //generer un nouveau nom unique pour l'image
+                $newFileName = uniqid().'.'.$image->guessExtension();
+                try { //Upload l'image dans un dossier du projet
                     $image->move(
-                        $this->getParameter('picture_profile_directory'),
-                        $newFileName . '.jpg' //Je triche sur .jpg
+                        $this->getParameter('picture_profile_directory'), //parametre de direction de l'upload
+                        $newFileName //Donner un nom au fichier
                     );
                 }catch (FileException $e){
                     //TODO traiter l exception
                 }
-                $user->setPictureFileName($newFileName . '.jpg'); // Je triche car fonction guessExtension pose probleme
+                $user->setPictureFileName($newFileName); //Upload le User avec le nom du fichier
             }
-            //fin test , ensuite configu services yaml parameters
+            //ensuite configu services yaml parameters
 
             $entityManager->persist($user);
             $entityManager->flush();

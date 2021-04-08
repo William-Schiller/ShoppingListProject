@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 
 class UserType extends AbstractType
 {
@@ -22,15 +22,19 @@ class UserType extends AbstractType
                 'mapped' => false,//pas associe a une entite
                 'required' => false,
                 'constraints' => [
-                    new File([
+                    new Image([ //new Image
                         'maxSize' => '10240k',
-//                            'mimeTypes' => [
-//                                'image/png',
-//                            ],
-//                            'mimeTypesMessage' => 'Please upload a valid document',
-                    //TODO Trouvé les mime pour fichier image
                         ])
                 ],
+//                'constraints' => [
+//                    new File([ //new Image
+//                        'maxSize' => '10240k',
+//                        'mimeTypes' => [
+//                            'image/*',
+//                        ],
+//                        'mimeTypesMessage' => 'Please upload a valid document',
+//                    ])
+//                ],
                 ])
         ;
     }
