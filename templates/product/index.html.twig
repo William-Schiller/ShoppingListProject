@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block main %}
+    <p> Hello toi </p>
+<div>
+    {{ form_start(formProduct) }}
+    Nom :
+    {{ form_widget(formProduct.name) }}
+    Unité :
+    {{ form_widget(formProduct.unit) }}
+    <button type="submit"> valider</button>
+        {{ form_end(formProduct) }}
+</div>
+
+
+<div>
+    <h3> Produits dans ta liste</h3>
+
+  {% for prod in listProduct %}
+      {{ prod.name }}
+    {% endfor %}
+
+
+
+
+
+</div>
+
+
+
+
+{% endblock %}
